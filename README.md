@@ -1,47 +1,52 @@
-PropertyHub - Elite Residency Platform
-PropertyHub is a production-ready, full-stack MERN application designed for seamless property buying, selling, and management. Built with a scalable Service-Repository Architecture, it offers real-time features, secure payments, and deep analytics.
+# PropertyHub - Elite Residency Platform
 
+PropertyHub is a full-stack MERN application for buying, selling, and managing properties.
 
-Live Demo & Documentation
-Live URL: [Insert Vercel Link Here]
-API Documentation (Swagger): [Insert Render Backend Link Here]/api-docs
-GitHub Repository: [Insert GitHub Link Here]
+## Tech Stack
 
-Tech Stack
-Frontend
+### Frontend
+- React.js
+- Redux Toolkit
+- Tailwind CSS
+- React Hook Form
+- Axios
 
-React.js (Functional Components, Hooks)
-State Management: Redux Toolkit
-Styling: Tailwind CSS / Framer Motion (Animations)
-Forms: React Hook Form
-API Client: Axios
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Socket.io
 
-Backend
-Node.js & Express.js
-Database: MongoDB (Mongoose ODM)
-Real-time: Socket.io (Chat & Notifications)
-Logging: Winston & Morgan
-Documentation: Swagger (OpenAPI 3.0)
-Helmet: Security headers.
-Rate Limiting: Prevents Brute-force attacks.
-Input Validation: Schema validation using Joi.
-Sanitization: Protection against NoSQL Injection & XSS.
-Performance: Lazy loading, code splitting, and API caching.
+## Project Setup
 
-Installation & Setup
-Clone the repo:
+### Backend
 
-git clone https://github.com/yourusername/propertyhub.git
-Backend Setup:
-
+```bash
 cd backend
 npm install
-# Create a .env file based on the provided template
 npm run dev
+```
 
+## Swagger url 
 
-Frontend Setup:
+http://localhost:8000/api-docs/#/
+### Frontend
 
+```bash
 cd frontend
 npm install
 npm run dev
+```
+
+## Features
+
+- User Authentication
+- Property Listing
+- Property Search & Filters
+- Property Details
+- Buy & Sell Properties
+- Real-time Notifications
+- Chat System
+- Secure API
+- Responsive Design
+
