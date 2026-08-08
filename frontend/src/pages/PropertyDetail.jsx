@@ -61,12 +61,22 @@ const PropertyDetail = () => {
     };
 
     const handleContactSeller = () => {
-        if (!isAuthenticated) return navigate('/login');
-        const event = new CustomEvent('openChat', {
-            detail: { id: property.owner?._id, name: property.owner?.name }
-        });
-        window.dispatchEvent(event);
-    };
+    if (!isAuthenticated) return navigate('/login');
+    
+
+    if (!property.owner?._id) {
+        toast.error("Seller information not available");
+        return;
+    }
+
+    const event = new CustomEvent('openChat', {
+        detail: { 
+            id: property.owner._id, 
+            name: property.owner.name 
+        }
+    });
+    window.dispatchEvent(event);
+};
 
     if (loading) return (
         <div className="h-screen flex flex-col items-center justify-center bg-white">

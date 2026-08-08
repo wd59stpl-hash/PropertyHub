@@ -77,11 +77,26 @@ const ChatWidget = () => {
     };
 
     const send = (e) => {
-        e.preventDefault();
-        if (!newMessage.trim()) return;
-        socket.current.emit('send_message', { senderId: currentUserId, receiverId: activeChat.id, content: newMessage });
-        setNewMessage("");
+    e.preventDefault();
+    if (!newMessage.trim()) return;
+
+    const messageData = {
+        sender: currentUserId,
+        receiver: activeChat.id,
+        content: newMessage,
+        createdAt: new Date().toISOString(), 
     };
+
+    socket.current.emit('send_message', { 
+        senderId: currentUserId, 
+        receiverId: activeChat.id, 
+        content: newMessage 
+    });
+
+    setMessages(prev => [...prev, messageData]);
+
+    setNewMessage("");
+};
 
     if (!isAuthenticated || !activeChat) return null;
     const isOnline = onlineUsers.includes(activeChat.id.toString());
