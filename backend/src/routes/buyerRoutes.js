@@ -13,7 +13,6 @@ const reviewController = require('../controllers/reviewController');
 const complaintController = require('../controllers/complaintController');
 const { upload } = require('../config/cloudinary');
 
-// Sabhi routes ke liye Buyer protection
 router.use(protect, authorize('buyer'));
 
 /**

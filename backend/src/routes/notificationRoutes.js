@@ -10,7 +10,6 @@ const router = express.Router();
 const notificationController = require('../controllers/notificationController');
 const { protect } = require('../middlewares/authMiddleware');
 
-// Sabhi routes ke liye Login zaroori hai
 router.use(protect);
 
 /**

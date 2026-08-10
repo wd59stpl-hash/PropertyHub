@@ -10,7 +10,6 @@ const router = express.Router();
 const { protect } = require('../middlewares/authMiddleware');
 const { getMessages, getConversations } = require('../controllers/chatController');
 
-// Sabhi chat routes ke liye Authentication zaroori hai
 router.use(protect);
 
 /**

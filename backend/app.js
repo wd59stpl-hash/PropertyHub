@@ -3,13 +3,12 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
-const swaggerUi = require('swagger-ui-express'); // Import Swagger
-const swaggerJsdoc = require('swagger-jsdoc'); // Import JsDoc
+const swaggerUi = require('swagger-ui-express'); 
+const swaggerJsdoc = require('swagger-jsdoc'); 
 const logger = require('./src/utils/logger');
 
 const app = express();
 
-// --- SWAGGER SETUP ---
 const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
@@ -21,12 +20,11 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Middlewares
 app.post('/api/payments/webhook', express.raw({ type: 'application/json' }));
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: true, credentials: true }));
 
-if (process.env.NODE_ENV === 'development') // Morgan setup to write logs into Winston
+if (process.env.NODE_ENV === 'development') 
 app.use(morgan('combined', {
     stream: {
         write: (message) => logger.info(message.trim())
@@ -36,7 +34,6 @@ app.use(morgan('combined', {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// NoSQL Injection Sanitization (Aapka custom logic)
 app.use((req, res, next) => {
     const sanitize = (obj) => {
         if (obj instanceof Object) {
@@ -55,7 +52,6 @@ app.use((req, res, next) => {
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 app.use('/api/', limiter);
 
-// Routes
 app.use('/api/auth', require('./src/routes/authRoutes'));
 app.use('/api/properties', require('./src/routes/propertyRoutes'));
 app.use('/api/bookings', require('./src/routes/bookingRoutes'));
@@ -71,10 +67,8 @@ app.use('/api/notifications', require('./src/routes/notificationRoutes'));
 
 app.get('/', (req, res) => res.json({ success: true, message: "PropertyHub API Running!" }));
 
-// 404 & Error Handler
 app.use((req, res) => res.status(404).json({ success: false, message: "Route not found" }));
 app.use((err, req, res, next) => {
-    // Ye line error.log mein entry daal degi
     logger.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
 
     res.status(err.statusCode || 500).json({
@@ -83,4 +77,4 @@ app.use((err, req, res, next) => {
     });
 });
 
-module.exports = app; // Export for testing
+module.exports = app; 

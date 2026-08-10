@@ -40,7 +40,6 @@ router.get('/', categoryController.getCategories);
  *               name: { type: string, example: "Luxury Villa" }
  *               description: { type: string, example: "Premium high-end properties" }
  */
-// Maine path ko '/' kar diya hai taaki ye '/api/categories' par kaam kare
 router.post('/', protect, authorize('admin'), categoryController.addCategory);
 
 module.exports = router;

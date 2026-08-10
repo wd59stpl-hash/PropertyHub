@@ -4,7 +4,6 @@ const { protect, authorize } = require('../middlewares/authMiddleware');
 const adminController = require('../controllers/adminController');
 const complaintController = require('../controllers/complaintController');
 
-// Sabhi routes ke liye Admin protection
 router.use(protect, authorize('admin'));
 
 /**
@@ -89,7 +88,6 @@ router.get('/reports/revenue', adminController.getRevenueReport);
  *     summary: View all user complaints (From Complaint Controller)
  *     tags: [Admin]
  */
-// Maine isse fix kar diya hai - sirf ek GET complaint rakha hai
 router.get('/complaints', complaintController.getAdminComplaints);
 
 /**
